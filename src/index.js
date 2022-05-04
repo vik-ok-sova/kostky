@@ -1,27 +1,23 @@
-/*import "./styles.css";
-
-document.getElementById("app").innerHTML = `
-<h1>Hello Vanilla!</h1>
-<div>
-  We use the same configuration as Parcel to bundle this sandbox, you can find more
-  info about Parcel 
-  <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
-</div>
-`;
-*/
-var data = [];
+//kdyz se klikne na #tlacitko: hodit kostkami, zapocitat hod do tabulky a grafu
 $("#tlacitko").click(function () {
+  //zobrazit komentar, vybrat dve nahodna cisla 1-6 a vypsat je
+  $("#pokec").html(
+    "Zdejší randomizační prográmek ti zvrací tyto dvě kostečné hodnoty:"
+  );
   var cisla = [
     Math.floor(Math.random() * 6) + 1,
     Math.floor(Math.random() * 6) + 1
   ];
-  //alert($("#data").html().trim());
   $("#vystup").html(cisla.join(", "));
+
+  //zapsat hod do tabulky
   $(
     "#".concat(cisla.reduce((soucet, kostka) => (soucet += kostka)).toString())
   ).html(function (n, current) {
     return Number(current) + 1;
   });
+
+  //obnovit data grafu
   chart.updateSeries([
     {
       data: [
@@ -41,12 +37,7 @@ $("#tlacitko").click(function () {
   ]);
 });
 
-$("#tlacitko").click(function () {
-  $("#pokec").html(
-    "Zdejší randomizační prográmek ti zvrací tyto dvě kostečné hodnoty:"
-  );
-});
-
+//nastavit parametry grafu
 var options = {
   series: [
     {
@@ -118,7 +109,7 @@ var options = {
     }
   },
   title: {
-    text: "Pekny grafik",
+    text: "Pěkný grafík",
     floating: true,
     offsetY: 330,
     align: "center",
@@ -128,5 +119,6 @@ var options = {
   }
 };
 
+//vytvorit graf
 var chart = new ApexCharts(document.querySelector("#grafik"), options);
 chart.render();
